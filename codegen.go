@@ -595,7 +595,7 @@ func (c *Codegen) generate(file *descriptorpb.FileDescriptorProto, sourcePath []
 		// toObject method
 		//
 
-		d.Lf("static toObject(message: %s, options: $protobuf.IConversionOptions): Record<string, any>;", messageType.GetName())
+		d.Lf("static toObject(message: %s, options: $protobuf.IConversionOptions): { [k: string]: any };", messageType.GetName())
 		j.L("static toObject(message, options = {}) {")
 		j.L("const object = {};")
 		// Init arrays
@@ -683,7 +683,7 @@ func (c *Codegen) generate(file *descriptorpb.FileDescriptorProto, sourcePath []
 		j.L("}")
 
 		// toJSON
-		d.L("toJSON(): Record<string, any>")
+		d.L("toJSON(): { [k: string]: any }")
 
 		// getTypeUrl
 		d.L(`static getTypeUrl(typeUrlPrefix = "type.googleapis.com"): string;`)
