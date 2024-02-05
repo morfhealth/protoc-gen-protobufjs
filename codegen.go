@@ -683,7 +683,7 @@ func (c *Codegen) generate(file *descriptorpb.FileDescriptorProto, sourcePath []
 		j.L("}")
 
 		// toJSON
-		d.L("toJSON(): { [k: string]: any }")
+		// d.L("toJSON(): { [k: string]: any }")
 
 		// getTypeUrl
 		d.L(`static getTypeUrl(typeUrlPrefix = "type.googleapis.com"): string;`)
@@ -696,9 +696,9 @@ func (c *Codegen) generate(file *descriptorpb.FileDescriptorProto, sourcePath []
 		j.L("}")
 
 		// Define prototype methods (note: not the same as static methods)
-		j.Lf("%s.prototype.toJSON = function toJSON() {", messageType.GetName())
-		j.L("return this.constructor.toObject(this, $protobuf.util.toJSONOptions);")
-		j.L("}")
+		// j.Lf("%s.prototype.toJSON = function toJSON() {", messageType.GetName())
+		// j.L("return this.constructor.toObject(this, $protobuf.util.toJSONOptions);")
+		// j.L("}")
 
 		// Assign defaults to class prototype instance
 		for _, field := range messageType.GetField() {
