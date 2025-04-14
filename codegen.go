@@ -875,10 +875,10 @@ func (c *Codegen) typeAnnotation(f *descriptorpb.FieldDescriptorProto) string {
 		entryType := c.Index.MessageTypes[f.GetTypeName()]
 		kf := entryType.GetField()[0]
 		vf := entryType.GetField()[1]
-		return fmt.Sprintf("Record<%s, %s>", c.presentSingularTypeAnnotation(kf), c.presentSingularTypeAnnotation(vf))
+		return fmt.Sprintf("Record<%s, %s>", c.singularTypeAnnotation(kf), c.singularTypeAnnotation(vf))
 	}
 	if f.GetLabel() == descriptorpb.FieldDescriptorProto_LABEL_REPEATED {
-		return fmt.Sprintf("Array<%s>", c.presentSingularTypeAnnotation(f))
+		return fmt.Sprintf("Array<%s>", c.singularTypeAnnotation(f))
 	}
 
 	return c.singularTypeAnnotation(f)
@@ -888,8 +888,6 @@ func (c *Codegen) singularTypeAnnotation(f *descriptorpb.FieldDescriptorProto) s
 	a := c.presentSingularTypeAnnotation(f)
 	if f.GetProto3Optional() {
 		a += " | null | undefined /* optional */"
-	} else if f.GetType() == descriptorpb.FieldDescriptorProto_TYPE_MESSAGE {
-		a += " | null | undefined"
 	}
 	return a
 }
