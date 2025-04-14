@@ -886,10 +886,8 @@ func (c *Codegen) typeAnnotation(f *descriptorpb.FieldDescriptorProto) string {
 
 func (c *Codegen) singularTypeAnnotation(f *descriptorpb.FieldDescriptorProto) string {
 	a := c.presentSingularTypeAnnotation(f)
-	if f.GetProto3Optional() {
+	if f.GetProto3Optional() || f.GetLabel() == descriptorpb.FieldDescriptorProto_LABEL_OPTIONAL {
 		a += " | null | undefined /* optional */"
-	} else if f.GetType() == descriptorpb.FieldDescriptorProto_TYPE_MESSAGE {
-		a += " | null | undefined"
 	}
 	return a
 }
