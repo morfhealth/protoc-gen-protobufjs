@@ -104,7 +104,7 @@ def _protoc_gen_protobufjs_impl(ctx):
         ),
     ]
 
-protoc_gen_protobufjs = rule(
+protoc_gen_protobufjs_2 = rule(
     doc = """
     Runs the protoc-gen-protobufjs plugin under protoc to generate
     JS code and TS typings from a proto library.
